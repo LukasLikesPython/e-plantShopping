@@ -258,7 +258,7 @@ function ProductList() {
            ...prevState,
            [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
          }));
-         changeTotalQuantity(totalQuantity + 1);
+         setTotalQuantity(totalQuantity + 1);
         };
     
     return (
@@ -314,8 +314,8 @@ function ProductList() {
 
         </div>
  ) :  (
-    <CartItem onContinueShopping={handleContinueShopping}/>,
-    <CartItem changeTotalQuantity={setTotalQuantity}/>
+    <CartItem onContinueShopping={handleContinueShopping}
+              changeTotalQuantity={setTotalQuantity}/>
 )}
     </div>
     );
