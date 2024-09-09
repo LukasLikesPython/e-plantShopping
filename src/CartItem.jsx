@@ -12,11 +12,9 @@ const CartItem = ({ onContinueShopping }) => {
     console.log(cart);
     if (cart){
    const costPerItem = cart.map((item, itemIndex) => 
-    (item.quantity * item.cost));
-    console.log(costPerItem);
+    (item.quantity * item.cost.substr(1)));
     const cost = costPerItem.reduce((partialSum, item) => partialSum + item, 0);
-    console.log(cost);
-    return cost;
+    return `${cost}`;
     }else{
         return 0;
     }
@@ -31,17 +29,23 @@ const CartItem = ({ onContinueShopping }) => {
     };
 
   const handleIncrement = (item) => {
+    dispatch(updateQuantity(item.name, item.quantity + 1));
   };
 
   const handleDecrement = (item) => {
-   
+    dispatch(updateQuantity(item.name, item.quantity - 1));
+    if(item.quantity <= 0){
+       handleRemove(item);
+    }
   };
-
   const handleRemove = (item) => {
+    dispatch(removeItem(item.name));
   };
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
+     console.log(item);
+     return `${item.quantity * item.cost.substr(1)}`;
   };
 
   return (
